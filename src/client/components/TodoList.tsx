@@ -9,7 +9,7 @@ import { api } from '@/utils/client/api'
  * -----------
  * A todo has 2 statuses: "pending" and "completed"
  *  - "pending" state is represented by an unchecked checkbox
- *  - "completed" state is represented by a checked checkbox, darker background,
+ *  - "completed" state is represented by a hecked checkbox, darker background,
  *    and a line-through text
  *
  * We have 2 backend apis:

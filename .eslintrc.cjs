@@ -33,6 +33,7 @@ module.exports = {
       {
         prefer: 'type-imports',
         fixStyle: 'separate-type-imports',
+        endOfLine: 'auto',
       },
     ],
     'import/order': [

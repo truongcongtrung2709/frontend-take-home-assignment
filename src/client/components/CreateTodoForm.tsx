@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, KeyboardEvent  } from 'react'
 
 import { api } from '@/utils/client/api'
 
@@ -28,6 +28,15 @@ export const CreateTodoForm = () => {
 
   const apiContext = api.useContext()
 
+  const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.code ==="Enter"){
+      createTodo({
+        body: todoBody,
+      })
+      setTodoBody('')
+
+    }
+  }
   const { mutate: createTodo, isLoading: isCreatingTodo } =
     api.todo.create.useMutation({
       onSuccess: () => {
@@ -46,13 +55,14 @@ export const CreateTodoForm = () => {
         type="text"
         placeholder="Add todo"
         value={todoBody}
+        onKeyPress={handleEnter}
         onChange={(e) => {
           setTodoBody(e.target.value)
         }}
         className="flex-1 px-4 text-base placeholder:text-gray-400 focus:outline-none"
       />
 
-      <button
+      <button className='bg-gray-700 text-white py-2 px-5 rounded-full'
         type="button"
         disabled={isCreatingTodo}
         onClick={() => {
