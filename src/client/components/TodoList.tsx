@@ -67,7 +67,26 @@ export const TodoList = () => {
   const { data: todos = [] } = api.todo.getAll.useQuery({
     statuses: ['completed', 'pending'],
   })
+  const updateStatus = api.todoStatus.update.useMutation()
+  const handleChangeStatus = (todo:any) => {
 
+    if(todo.status === 'pending'){
+      updateStatus.mutate({
+      todoId: todo.id,
+      status : "completed",
+
+    })
+    console.log(todo);
+
+    }else{
+      updateStatus.mutate({
+        todoId: todo.id,
+        status : "pending",
+      })
+
+    } 
+    
+  }
   return (
     <ul className="grid grid-cols-1 gap-y-3">
       {todos.map((todo) => (
@@ -76,9 +95,10 @@ export const TodoList = () => {
             <Checkbox.Root
               id={String(todo.id)}
               className="flex h-6 w-6 items-center justify-center rounded-6 border border-gray-300 focus:border-gray-700 focus:outline-none data-[state=checked]:border-gray-700 data-[state=checked]:bg-gray-700"
+              onCheckedChange={()=> handleChangeStatus(todo)}
             >
               <Checkbox.Indicator>
-                <CheckIcon className="h-4 w-4 text-white" />
+                <CheckIcon className="h-4 w-4 text-white"  />
               </Checkbox.Indicator>
             </Checkbox.Root>
 
